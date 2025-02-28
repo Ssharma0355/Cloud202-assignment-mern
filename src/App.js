@@ -1,22 +1,22 @@
-import { Home, Layers, LayoutDashboard, StickyNote } from 'lucide-react';
-import Sidebar, { SidebarItem } from './components/Sidebar';
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./Layout";
+import Form1 from "./pages/Form1";
+import Form2 from "./pages/Form2";
+import Form3 from "./pages/Form3";
 
 function App() {
   return (
-    <div>
-      <Sidebar>
-        <SidebarItem icon={<Home size={20} />} text="Home" alert />
-        <SidebarItem
-          icon={<LayoutDashboard size={20} />}
-          text="Dashboard"
-          alert
-        />
-        <SidebarItem icon={<StickyNote size={20} />} text="Notes" alert />
-
-        <SidebarItem icon={<Layers size={20} />} text="Notes" alert />
-      </Sidebar>
-    </div>
+    <Router>
+      <Routes>
+        {/* Wrap pages inside Layout */}
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Form1 />} />
+          <Route path="dashboard" element={<Form2 />} />
+          <Route path="notes" element={<Form3 />} />
+          <Route path="/layers" element={<Form3 />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

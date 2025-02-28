@@ -1,33 +1,39 @@
-import { ChevronFirst, ChevronLast, ChevronRight } from 'lucide-react';
-import logo from '../assets/logo.svg'
-export default function Sidebar({ children }) {
+import { Link } from "react-router-dom";
+import { Home, Layers, LayoutDashboard, StickyNote } from "lucide-react";
+
+export const SidebarItem = ({ icon, text, to }) => {
   return (
-    <aside className="h-screen w-64 fixed bg-white border-r shadow-sm">
-      <nav className="h-full flex flex-col">
-        <div className="p-4 pb-2 flex justify-between items-center">
-          <img src={logo} alt="logo" className='w-22' />
-          <button className='p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100'>
-            <ChevronFirst /> 
-          </button>
-        </div>
-        <ul className='flex-1 px-3 pt-4'>{children}</ul>
+    <li className="p-2 hover:bg-gray-700 rounded">
+      <Link to={to} className="flex items-center gap-2 text-white">
+        {icon}
+        {text}
+      </Link>
+    </li>
+  );
+};
+
+const Sidebar = () => {
+  return (
+    <aside className="w-52 bg-gray-800 text-white h-screen p-4 ">
+      <nav>
+
+        <ul>
+          <SidebarItem icon={<Home size={20} />} text="Home" to="/" />
+          <SidebarItem
+            icon={<LayoutDashboard size={20} />}
+            text="Dashboard"
+            to="/dashboard"
+          />
+          <SidebarItem
+            icon={<StickyNote size={20} />}
+            text="Notes"
+            to="/notes"
+          />
+          <SidebarItem icon={<Layers size={20} />} text="Layers" to="/layers" />
+        </ul>
       </nav>
     </aside>
   );
-}
+};
 
-export function SidebarItem({icon, text, active, alert}){
-return (
-  <li
-    className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group 
-    ${
-      active
-        ? "bg-gradient-to-tr from-indigo-200 to-indigo-800 text-white"
-        : "hover:bg-indigo-50 text-gray-600"
-    }`}
-  >
-    {icon}
-    <span className="w-52 ml-3">{text}</span>
-  </li>
-);
-}
+export default Sidebar;
