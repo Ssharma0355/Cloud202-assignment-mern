@@ -16,7 +16,6 @@ export default function Sidebar({ children }) {
   );
 }
 
-
 export function SidebarItem({icon, text, active, alert}){
 return (
   <li
